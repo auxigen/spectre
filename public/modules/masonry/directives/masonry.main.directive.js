@@ -21,6 +21,11 @@
                     columnWidth: '.grid-sizer',
                     percentPosition: true
                 });
+                
+                imagesLoaded( grid ).on('done', function() {
+                    console.log("done!")
+                    msnry.layout();
+                });
             }]
         };
     });
