@@ -12,5 +12,6 @@
             "http://s3cf.recapguide.com/img/tv/138/1x7/Rick-and-Morty-Season-1-Episode-7-31-1e6c.jpg",
             "https://s-media-cache-ak0.pinimg.com/736x/cc/20/47/cc2047866c7bc5da798a3325a84df989.jpg",
                         ];
+        
     }]);
 }());

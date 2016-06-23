@@ -8,13 +8,18 @@
             },
             templateUrl: 'modules/masonry/templates/masonry.main.template.html',
             link: function(scope, iElement, iAttrs) {
-                console.log(scope);
+                ///*
+                var html = '<div class="grid-sizer"></div>';
                 angular.forEach(scope.images, function(v){
-                    iElement.append(angular.element('<div class="grid-item"><img src='+v+' /></div>'));
+                    html += '<div class="grid-item"><img src='+v+' /></div>'
                 });
+                
+                iElement.find('div').html(html);
+                //*/
+                
             },
             controller: ['$scope', '$http', function($scope) {
-                console.log($scope);
+                
                 var grid = document.querySelector('.grid');
                 var msnry = new Masonry( grid, {
                     itemSelector: '.grid-item',
@@ -22,8 +27,8 @@
                     percentPosition: true
                 });
                 
-                imagesLoaded( grid ).on('done', function() {
-                    console.log("done!")
+                imagesLoaded( $scope.images ).on('always', function(instance) {
+                    console.log(instance, msnry)
                     msnry.layout();
                 });
             }]

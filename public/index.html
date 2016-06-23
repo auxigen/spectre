@@ -15,27 +15,53 @@
         <script type="text/javascript" src="node_modules/masonry-layout/dist/masonry.pkgd.js"></script>
         <script type="text/javascript" src="node_modules/imagesloaded/imagesloaded.pkgd.js"></script>
     </head>
-    <body>
-        <div ng-controller="coreMainCtrl" ng-cloak>
-            <md-content>
-                <md-toolbar class="md-hue-2"></md-toolbar>
-                <md-grid-list
-                    md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
-                    md-row-height-gt-md="1:1" md-row-height="4:3"
-                    md-gutter="8px" md-gutter-gt-sm="4px" >
-                    <md-grid-tile ng-repeat="tile in images"
-                              
-                              md-colspan-sm="1"
-                              md-colspan-xs="1"
-                              ng-class="tile.background" >
-                        <img src="{{tile}}">
-                        <md-grid-tile-footer><h3>{{tile}}</h3></md-grid-tile-footer>
-                    </md-grid-tile>
-                </md-grid-list>
-            </md-content>
+    <body ng-controller="coreMainCtrl">
+        <div class="grid">
+            <div class="grid-sizer"></div>
+            <div class="grid-item">
+                <img src="http://cdn3.thr.com/sites/default/files/2015/07/rick_and_morty_s02_still.jpg">
+            </div>
+            <div class="grid-item">
+                <img src="http://i.cdn.turner.com/asfix/repository//8a250ba13f865824013fc9db8b6b0400/thumbnail_8336877768336012.jpg">
+            </div>
+            <div class="grid-item">
+                <img src="http://i.cdn.turner.com/asfix/repository/8a250ba13f865824013fc9db8b6b0400/rick-and-morty-pilot.jpg">
+            </div>
+            <div class="grid-item">
+                <img src="http://ia.media-imdb.com/images/M/MV5BMTQ4MzgyNzQ2Nl5BMl5BanBnXkFtZTgwODQ0OTQzNjE@._V1_UX477_CR0,0,477,268_AL_.jpg" id="exifviewer-img-3" exifid="-1504498793" oldsrc="http://ia.media-imdb.com/images/M/MV5BMTQ4MzgyNzQ2Nl5BMl5BanBnXkFtZTgwODQ0OTQzNjE@._V1_UX477_CR0,0,477,268_AL_.jpg">
+            </div>
+            <div class="grid-item">
+                <img src="http://www.watchcartoononline.com/thumbs/Rick-and-Morty-Episode-5-Meeseeks-and-Destroy.jpg" id="exifviewer-img-2" exifid="-1542478177" oldsrc="http://www.watchcartoononline.com/thumbs/Rick-and-Morty-Episode-5-Meeseeks-and-Destroy.jpg">
+            </div>
+            <div class="grid-item">
+                <img src="http://cdn1us.denofgeek.com/sites/denofgeekus/files/styles/insert_main_wide_image/public/13_1.jpg?itok=CxuuPIIS">
+            </div>
+            <div class="grid-item">
+                <img src="http://www.watchcartoononline.com/thumbs/Rick-and-Morty-Episode-4-M-Night-Shaym-Aliens-.jpg" id="exifviewer-img-1" exifid="-1060113353" oldsrc="http://www.watchcartoononline.com/thumbs/Rick-and-Morty-Episode-4-M-Night-Shaym-Aliens-.jpg">
+            </div>
+            <div class="grid-item">
+                <img src="http://s3cf.recapguide.com/img/tv/138/1x7/Rick-and-Morty-Season-1-Episode-7-31-1e6c.jpg">
+            </div>
+            <div class="grid-item">
+                <img src="https://s-media-cache-ak0.pinimg.com/736x/cc/20/47/cc2047866c7bc5da798a3325a84df989.jpg">
+            </div>
         </div>
     </body>
     <script type="text/javascript" src="modules/core/config/core.main.config.js"></script>
     <script type="text/javascript" src="modules/core/controllers/core.main.controller.js"></script>
-    <script type="text/javascript" src="modules/masonry/directives/masonry.main.directive.js"></script>
+    <script>
+        var grid = document.querySelector('.grid');
+        var msnry;
+
+        imagesLoaded( grid, function() {
+          // init Isotope after all images have loaded
+          msnry = new Masonry( grid, {
+            itemSelector: '.grid-item',
+            columnWidth: '.grid-sizer',
+            percentPosition: true,
+              gutter: 0
+          });
+        });
+    </script>
+    <!--<script type="text/javascript" src="modules/masonry/directives/masonry.main.directive.js"></script>-->
 </html>
