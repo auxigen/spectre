@@ -47,12 +47,16 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #fafafa;
+    padding: 0;
+    margin: 0;
 }
 
 * { box-sizing: border-box; }
 
-/* force scrollbar */
-html { overflow-y: scroll; }
+html, body, #admin-map {
+    height: 100%;
+    width: 100%;
+}
 
 /* ---- grid ---- */
 
@@ -79,6 +83,46 @@ html { overflow-y: scroll; }
 }
 
 .grid-item img {
-  display: block;
-  width: 100%;
+    display: block;
+    width: 100%;
+}
+
+#vertical-container {
+    height: 100%;
+}
+.repeated-item {
+    padding-top: 10px;
+}
+
+.md-virtual-repeat-container .md-virtual-repeat-offsetter div {
+    padding-left: 16px;
+}
+
+.top-search input[type="text"] {
+    border: 0;
+    height: 65px;
+    padding: 0 10px 0 55px;
+    font-size: 18px;
+    width: 500px;
+    border-radius: 2px;
+    background-color: #efefef;
+    width: 100%;
+}
+
+.top-search .close {
+    position: absolute;
+    top: 15px;
+    font-size: 23px;
+    font-style: normal;
+    width: 45px;
+    text-align: center;
+    border-radius: 2px 0px 0px 2px;
+    cursor: pointer;
+    left: 15px;
+    height: 40px;
+    padding-top: 9px;
+}
+
+.admin-map-container .leaflet-tile {
+    height: 256px !important;
 }

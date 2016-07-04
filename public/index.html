@@ -2,66 +2,103 @@
 <html ng-app="Spectre" ng-cloak>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
         <title>basic</title>
         <link rel="stylesheet" href="node_modules/angular-material/angular-material.css" />
+        <link rel="stylesheet" href="node_modules/nvd3/build/nv.d3.css" />
+        <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" />
         <link rel="stylesheet" href="css/style.css" />
         
+        <script>L_PREFER_CANVAS = true;</script>
         <script type="text/javascript" src="node_modules/angular/angular.js"></script>
         <script type="text/javascript" src="node_modules/angular-aria/angular-aria.js"></script>
         <script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"></script>
         <script type="text/javascript" src="node_modules/angular-material/angular-material.js"></script>
+        <script type="text/javascript" src="node_modules/d3/d3.js"></script>
+        <script type="text/javascript" src="node_modules/nvd3/build/nv.d3.js"></script>
+        <script type="text/javascript" src="node_modules/angular-nvd3/dist/angular-nvd3.js"></script>
+        <script type="text/javascript" src="node_modules/leaflet/dist/leaflet-src.js"></script>
+        <script type="text/javascript" src="node_modules/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
+
         
         <script type="text/javascript" src="node_modules/masonry-layout/dist/masonry.pkgd.js"></script>
         <script type="text/javascript" src="node_modules/imagesloaded/imagesloaded.pkgd.js"></script>
     </head>
     <body ng-controller="coreMainCtrl">
-        <div class="grid">
-            <div class="grid-sizer"></div>
-            <div class="grid-item">
-                <img src="http://cdn3.thr.com/sites/default/files/2015/07/rick_and_morty_s02_still.jpg">
-            </div>
-            <div class="grid-item">
-                <img src="http://i.cdn.turner.com/asfix/repository//8a250ba13f865824013fc9db8b6b0400/thumbnail_8336877768336012.jpg">
-            </div>
-            <div class="grid-item">
-                <img src="http://i.cdn.turner.com/asfix/repository/8a250ba13f865824013fc9db8b6b0400/rick-and-morty-pilot.jpg">
-            </div>
-            <div class="grid-item">
-                <img src="http://ia.media-imdb.com/images/M/MV5BMTQ4MzgyNzQ2Nl5BMl5BanBnXkFtZTgwODQ0OTQzNjE@._V1_UX477_CR0,0,477,268_AL_.jpg" id="exifviewer-img-3" exifid="-1504498793" oldsrc="http://ia.media-imdb.com/images/M/MV5BMTQ4MzgyNzQ2Nl5BMl5BanBnXkFtZTgwODQ0OTQzNjE@._V1_UX477_CR0,0,477,268_AL_.jpg">
-            </div>
-            <div class="grid-item">
-                <img src="http://www.watchcartoononline.com/thumbs/Rick-and-Morty-Episode-5-Meeseeks-and-Destroy.jpg" id="exifviewer-img-2" exifid="-1542478177" oldsrc="http://www.watchcartoononline.com/thumbs/Rick-and-Morty-Episode-5-Meeseeks-and-Destroy.jpg">
-            </div>
-            <div class="grid-item">
-                <img src="http://cdn1us.denofgeek.com/sites/denofgeekus/files/styles/insert_main_wide_image/public/13_1.jpg?itok=CxuuPIIS">
-            </div>
-            <div class="grid-item">
-                <img src="http://www.watchcartoononline.com/thumbs/Rick-and-Morty-Episode-4-M-Night-Shaym-Aliens-.jpg" id="exifviewer-img-1" exifid="-1060113353" oldsrc="http://www.watchcartoononline.com/thumbs/Rick-and-Morty-Episode-4-M-Night-Shaym-Aliens-.jpg">
-            </div>
-            <div class="grid-item">
-                <img src="http://s3cf.recapguide.com/img/tv/138/1x7/Rick-and-Morty-Season-1-Episode-7-31-1e6c.jpg">
-            </div>
-            <div class="grid-item">
-                <img src="https://s-media-cache-ak0.pinimg.com/736x/cc/20/47/cc2047866c7bc5da798a3325a84df989.jpg">
+        <div id="main" layout="column" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;">
+            <div style="height: 100%;">
+                <md-content flex layout="column" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;">
+                    <md-card>
+                        <nvd3 options="options" data="data"></nvd3>
+                    </md-card>
+                    <div layout="row" flex>
+                        <md-card class="admin-map-container" flex="50">
+                            <div id="admin-map" height="400px"></div>
+                        </md-card>
+                        <md-card flex="50">
+                            <md-toolbar class="top-search">
+                                <md-icon class="material-icons close">search</md-icon>
+                                <input type="text" ng-model="search" placeholder="Search">
+                            </md-toolbar>
+                            <md-virtual-repeat-container id="vertical-container">
+                                <div md-virtual-repeat="item in items | filter: search" class="repeated-item" flex>
+                                    <md-list flex>
+                                        <md-list-item class="md-3-line" g-click="null">
+                                            <img ng-src="https://s-media-cache-ak0.pinimg.com/564x/09/94/5f/09945fe83c94669cd0cfcddce4bae788.jpg" class="md-avatar" alt="{{item.who}}" />
+                                            <div class="md-list-item-text" layout="column">
+                                                <h3>{{ item }}</h3>
+                                                <h4>{{ item }}</h4>
+                                                <p>{{ item }}</p>
+                                            </div>
+                                        </md-list-item>
+                                  </md-list>
+                              </div>
+                            </md-virtual-repeat-container>    
+                        </md-card>
+                    </div>
+                    
+                </md-content>
             </div>
         </div>
+        
+            <!--
+            <md-card flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="25" layout="column">
+                <md-toolbar class="top-search">
+                    <md-icon class="material-icons close">search</md-icon>
+                    <input type="text" ng-model="search" placeholder="Search">
+                </md-toolbar>
+                <md-virtual-repeat-container id="vertical-container">
+                    <div md-virtual-repeat="item in items | filter: search" class="repeated-item" flex>
+                        <md-list flex>
+                            <md-list-item class="md-3-line" g-click="null">
+                                <img ng-src="https://s-media-cache-ak0.pinimg.com/564x/09/94/5f/09945fe83c94669cd0cfcddce4bae788.jpg" class="md-avatar" alt="{{item.who}}" />
+                                <div class="md-list-item-text" layout="column">
+                                    <h3>{{ item }}</h3>
+                                    <h4>{{ item }}</h4>
+                                    <p>{{ item }}</p>
+                                </div>
+                            </md-list-item>
+                      </md-list>
+                  </div>
+                </md-virtual-repeat-container>
+            </md-card>
+            <md-card flex-xs="100" flex-sm="50" flex-md="67" flex-gt-md="75">
+                <div>
+                    <canvas 
+                            id="line" 
+                            class="chart chart-line" 
+                            chart-data="data" 
+                            chart-labels="labels" 
+                            chart-series="series" 
+                            chart-options="options" 
+                            chart-dataset-override="datasetOverride" 
+                            chart-click="onClick">
+                    </canvas> 
+                </div>
+            </md-card>
+-->
     </body>
     <script type="text/javascript" src="modules/core/config/core.main.config.js"></script>
     <script type="text/javascript" src="modules/core/controllers/core.main.controller.js"></script>
-    <script>
-        var grid = document.querySelector('.grid');
-        var msnry;
-
-        imagesLoaded( grid, function() {
-          // init Isotope after all images have loaded
-          msnry = new Masonry( grid, {
-            itemSelector: '.grid-item',
-            columnWidth: '.grid-sizer',
-            percentPosition: true,
-              gutter: 0
-          });
-        });
-    </script>
     <!--<script type="text/javascript" src="modules/masonry/directives/masonry.main.directive.js"></script>-->
 </html>
