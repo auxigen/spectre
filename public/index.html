@@ -27,12 +27,80 @@
     <body ng-controller="coreMainCtrl">
         <div id="main" layout="column" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;">
             <div style="height: 100%;">
-                <md-content flex layout="column" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;">
+                <md-toolbar class="md-primary">
+                    <div class="md-toolbar-tools">
+                        <span>Oooo Wee</span>
+                    </div>
+                </md-toolbar>
+                <md-content flex layout="row" style="position: absolute; top: 64px; left: 0; bottom: 0; right: 0;">
+                    <md-card flex="50" class="admin-items">
+                            <md-toolbar class="top-search" ng-if="search">
+                                <md-icon class="material-icons close">search</md-icon>
+                                <input type="text" ng-model="search" placeholder="Search">
+                            </md-toolbar>
+                            <md-toolbar class="md-primary md-hue-1">
+                                <div class="md-toolbar-tools">
+                                <span>Items</span>
+                                    </div>
+                            </md-toolbar>
+                            <md-virtual-repeat-container id="vertical-container">
+                                <div md-virtual-repeat="item in items | filter: search" class="repeated-item" flex>
+                                    <md-list flex>
+                                        <md-list-item class="md-2-line" g-click="null">
+                                            <img ng-src="https://s-media-cache-ak0.pinimg.com/564x/09/94/5f/09945fe83c94669cd0cfcddce4bae788.jpg" class="md-avatar" alt="{{item.who}}" />
+                                            <div class="md-list-item-text" layout="column">
+                                                <h3>{{ item }}</h3>
+                                                <p>{{ item }}</p>
+                                                
+                                            </div>
+                                            <md-button class="md-icon-button">
+                                                <md-icon class="material-icons step">edit</md-icon>
+                                            </md-button>
+                                        </md-list-item>
+                                  </md-list>
+                                    <md-divider></md-divider>
+                              </div>
+                            </md-virtual-repeat-container>    
+                        </md-card>
+                    <div flex=50 layout="column">
+                        <md-card class="admin-widget">
+                            <md-toolbar class="md-primary md-hue-1">
+                                <div class="md-toolbar-tools">
+                                <span>Activity</span>
+                                    </div>
+                            </md-toolbar>
+
+                            <nvd3 options="options" data="data"></nvd3>
+                        </md-card>
+                        <md-card class="admin-widget admin-map-container" flex>
+                            <md-toolbar class="md-primary md-hue-1">
+                                <div class="md-toolbar-tools">
+                                    <span>Map</span>
+                                </div>
+                            </md-toolbar>
+                            <div id="admin-map" height="400px"></div>
+                        </md-card>
+                    </div>
+                </md-content>
+            </div>
+        </div>
+                    <!--
                     <md-card>
+                        <md-toolbar class="top-search">
+                            <div class="md-toolbar-tools">
+                            <span>Activity</span>
+                                </div>
+                        </md-toolbar>
+                        
                         <nvd3 options="options" data="data"></nvd3>
                     </md-card>
                     <div layout="row" flex>
                         <md-card class="admin-map-container" flex="50">
+                            <md-toolbar class="top-search">
+                            <div class="md-toolbar-tools">
+                            <span>Map</span>
+                                </div>
+                        </md-toolbar>
                             <div id="admin-map" height="400px"></div>
                         </md-card>
                         <md-card flex="50">

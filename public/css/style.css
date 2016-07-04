@@ -123,6 +123,14 @@ html, body, #admin-map {
     padding-top: 9px;
 }
 
-.admin-map-container .leaflet-tile {
-    height: 256px !important;
+.admin-items {
+    margin: 16px 0px 16px 16px;
+}
+
+.admin-widget {
+    margin: 16px;
+}
+
+.admin-map-container img {
+    height: auto !important;
 }
